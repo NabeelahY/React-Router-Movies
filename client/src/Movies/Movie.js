@@ -6,7 +6,6 @@ import MovieCard from './MovieCard';
 export default class Movie extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       movie: null
     };
@@ -29,16 +28,16 @@ export default class Movie extends Component {
       });
   };
   // Uncomment this code when you're ready for the stretch problems
-  // componentWillReceiveProps(newProps){
-  //   if(this.props.match.params.id !== newProps.match.params.id){
-  //     this.fetchMovie(newProps.match.params.id);
-  //   }
-  // }
+  componentWillReceiveProps(newProps){
+    if(this.props.match.params.id !== newProps.match.params.id){
+      this.fetchMovie(newProps.match.params.id);
+    }
+  }
 
-  // saveMovie = () => {
-  //   const addToSavedList = this.props.addToSavedList;
-  //   addToSavedList(this.state.movie)
-  // }
+  saveMovie = () => {
+    const addToSavedList = this.props.addToSavedList;
+    addToSavedList(this.state.movie)
+  }
 
   render() {
     if (!this.state.movie) {
@@ -47,7 +46,7 @@ export default class Movie extends Component {
 
     const { movie } = this.state;
     return (
-      <MovieCard movie={movie} />
+      <MovieCard movie={movie} saveMovie={this.saveMovie}/>
     );
   }
 }
